@@ -102,3 +102,18 @@ if st.button("Analyze"):
     # Provide the file for download
     with open(pdf_file, "rb") as f:
         st.download_button("Download PDF Report", f, file_name=pdf_file, key="unique_pdf_btn")
+st.markdown("---")
+st.markdown("### About")
+st.markdown("""
+This app was developed as a real-time simulation project for the **Human Assist Devices** subject (CBM352),  
+B.E. Electronics and Communication Engineering, Anna University - Regulation 2021.
+
+**Features:**
+- Predicts hearing loss using machine learning
+- Recommends suitable hearing aids
+- Visualizes audiogram data
+- Generates downloadable reports
+
+**Developer:** [Your Name]  
+**Toolkits:** Google Colab, Streamlit, Scikit-learn, FPDF
+""")
