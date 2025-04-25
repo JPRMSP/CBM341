@@ -67,29 +67,38 @@ ax.set_ylabel("Hearing Threshold (dB HL)")
 ax.invert_yaxis()  # Audiograms are traditionally upside-down
 st.pyplot(fig)
 
+# Ensure you have input data and the model prediction
 if st.button("Analyze"):
-    prediction = predict_hearing_loss(thresholds)
-    recommendation = recommend_hearing_aid(prediction)
+    # Perform model prediction (example, assuming X_test data)
+    prediction = model.predict([thresholds])  # assuming thresholds are your features
 
-pdf = FPDF()
-pdf.add_page()
-pdf.set_font("Arial", size=12)
-pdf.cell(200, 10, txt="Hearing Assessment Report", ln=True, align='C')
-pdf.ln(10)
+    # Define the recommendation based on prediction
+    if prediction == 0:
+        recommendation = "No hearing aid needed"
+    elif prediction == 1:
+        recommendation = "Consider mild hearing aid"
+    else:
+        recommendation = "Consider advanced hearing aid"
 
-# Add audiogram data to the report
-for i, f in enumerate(["250Hz", "500Hz", "1000Hz", "2000Hz", "4000Hz", "8000Hz"]):
-    pdf.cell(200, 10, txt=f"{f}: {thresholds[i]} dB HL", ln=True)
+    # Generate PDF
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.cell(200, 10, txt="Hearing Assessment Report", ln=True, align='C')
+    pdf.ln(10)
 
-pdf.ln(10)
-pdf.cell(200, 10, txt=f"Predicted Hearing Loss: {prediction}", ln=True)
-pdf.cell(200, 10, txt=f"Recommended Aid: {recommendation}", ln=True)
+    # Add audiogram data to the report
+    for i, f in enumerate(["250Hz", "500Hz", "1000Hz", "2000Hz", "4000Hz", "8000Hz"]):
+        pdf.cell(200, 10, txt=f"{f}: {thresholds[i]} dB HL", ln=True)
 
-# Output the PDF to a file
-pdf_file = "hearing_report.pdf"
-pdf.output(pdf_file)
+    pdf.ln(10)
+    pdf.cell(200, 10, txt=f"Predicted Hearing Loss: {prediction}", ln=True)
+    pdf.cell(200, 10, txt=f"Recommended Aid: {recommendation}", ln=True)
 
-# Provide the file for download
-with open(pdf_file, "rb") as f:
-    st.download_button("Download PDF Report", f, file_name=pdf_file, key="unique_pdf_btn")
-    
+    # Output the PDF to a file
+    pdf_file = "hearing_report.pdf"
+    pdf.output(pdf_file)
+
+    # Provide the file for download
+    with open(pdf_file, "rb") as f:
+        st.download_button("Download PDF Report", f, file_name=pdf_file, key="unique_pdf_btn")
