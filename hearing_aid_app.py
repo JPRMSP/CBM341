@@ -85,7 +85,7 @@ if st.button("Analyze"):
         pdf.output(pdf_file)
 
         with open(pdf_file, "rb") as f:
-            st.download_button("Download PDF Report", f, file_name=pdf_file)
+            st.download_button("Download PDF Report", f, file_name=pdf_file, key="unique_pdf_btn")    
     
     st.success(f"**Predicted Hearing Loss:** {prediction}")
     st.info(f"**Recommended Hearing Aid:** {recommendation}")
