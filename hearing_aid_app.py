@@ -70,20 +70,26 @@ st.pyplot(fig)
 if st.button("Analyze"):
     prediction = predict_hearing_loss(thresholds)
     recommendation = recommend_hearing_aid(prediction)
+
+pdf = FPDF()
+pdf.add_page()
+pdf.set_font("Arial", size=12)
+pdf.cell(200, 10, txt="Hearing Assessment Report", ln=True, align='C')
+pdf.ln(10)
+
+# Add audiogram data to the report
+for i, f in enumerate(["250Hz", "500Hz", "1000Hz", "2000Hz", "4000Hz", "8000Hz"]):
+    pdf.cell(200, 10, txt=f"{f}: {thresholds[i]} dB HL", ln=True)
+
+pdf.ln(10)
+pdf.cell(200, 10, txt=f"Predicted Hearing Loss: {prediction}", ln=True)
+pdf.cell(200, 10, txt=f"Recommended Aid: {recommendation}", ln=True)
+
+# Output the PDF to a file
+pdf_file = "hearing_report.pdf"
+pdf.output(pdf_file)
+
+# Provide the file for download
+with open(pdf_file, "rb") as f:
+    st.download_button("Download PDF Report", f, file_name=pdf_file, key="unique_pdf_btn")
     
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt="Hearing Assessment Report", ln=True, align='C')
-    pdf.ln(10)
-    for i, f in enumerate(["250Hz", "500Hz", "1000Hz", "2000Hz", "4000Hz", "8000Hz"]):
-        pdf.cell(200, 10, txt=f"{f}: {thresholds[i]} dB HL", ln=True)
-        pdf.ln(10)
-        pdf.cell(200, 10, txt=f"Predicted Hearing Loss: {prediction}", ln=True)
-        pdf.cell(200, 10, txt=f"Recommended Aid: {recommendation}", ln=True)
-
-        pdf_file = "hearing_report.pdf"
-        pdf.output(pdf_file)
-
-        with open(pdf_file, "rb") as f:
-           st.download_button("Download PDF Report", f, file_name=pdf_file, key="unique_pdf_btn")    
