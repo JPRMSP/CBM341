@@ -105,8 +105,8 @@ if st.button("Analyze"):
 st.markdown("---")
 st.markdown("### About")
 st.markdown("""
-This app was developed as a real-time simulation project for the **Human Assist Devices** subject (CBM352),  
-B.E. Electronics and Communication Engineering, Anna University - Regulation 2021.
+This app was developed as a real-time simulation project for the **BODY AREA NETWORKS** subject (CBM341),  
+B.E. Electronics and Communication Engineering
 
 **Features:**
 - Predicts hearing loss using machine learning
@@ -114,6 +114,4 @@ B.E. Electronics and Communication Engineering, Anna University - Regulation 202
 - Visualizes audiogram data
 - Generates downloadable reports
 
-**Developer:** [Your Name]  
-**Toolkits:** Google Colab, Streamlit, Scikit-learn, FPDF
 """)
