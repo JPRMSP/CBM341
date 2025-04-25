@@ -32,6 +32,7 @@ def predict_hearing_loss(thresholds):
     label = le.inverse_transform([pred])[0]
     return label
 
+
 def recommend_hearing_aid(hearing_loss_type):
     if hearing_loss_type == "Normal":
         return "No hearing aid required"
