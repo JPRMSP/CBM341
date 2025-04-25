@@ -1,6 +1,6 @@
-streamlit
-scikit-learn
-matplotlib
+streamlit>=1.25.0
+scikit-learn>=1.3.0
+matplotlib>=3.7.0
 fpdf
 pandas
 numpy
