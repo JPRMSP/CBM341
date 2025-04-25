@@ -87,12 +87,12 @@ if st.button("Analyze"):
         with open(pdf_file, "rb") as f:
            st.download_button("Download PDF Report", f, file_name=pdf_file, key="unique_pdf_btn")    
 
-st.success(f"**Predicted Hearing Loss:** {prediction}")
-st.info(f"**Recommended Hearing Aid:** {recommendation}")
+ st.success(f"**Predicted Hearing Loss:** {prediction}")
+ st.info(f"**Recommended Hearing Aid:** {recommendation}")
 
-st.markdown("---")
-st.markdown("### About")
-st.markdown("""
+ st.markdown("---")
+ st.markdown("### About")
+ st.markdown("""
 This app was developed as a real-time simulation project for the **Human Assist Devices** subject (CBM352),  
 B.E. Electronics and Communication Engineering, Anna University - Regulation 2021.
 
